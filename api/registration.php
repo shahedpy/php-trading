@@ -12,7 +12,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' ){
     $confirm_password = $_POST['confirm_password'];
 
     if($password != $confirm_password){
-        echo 'Password and confirm password are not same';
+      $_SESSION['error_msg'] = 'Password and confirm password are not same';
+      
     }
 
     $enc_pass = md5($password);
@@ -23,7 +24,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' ){
 
 
 //sql for check referal okay or not
-
 $select_ref_sql = "SELECT `phone` FROM `users` WHERE `phone` = '".$refferal."'";
 $result = $conn->query($select_ref_sql);
 if (mysqli_num_rows($result)){
@@ -32,11 +32,12 @@ if (mysqli_num_rows($result)){
     header('location: ../login.php');
   
   } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+    $_SESSION['error_msg'] = "Error: " . $sql . "<br>" . $conn->error;
   }
   
 } else {
-  echo 'refferal does not exists';
+  $_SESSION['error_msg'] = 'Refferal does not exists';
+  header('location: ../register.php');
 }
 
 
@@ -46,5 +47,5 @@ $conn->close();
 
 
 } else {
-  header('location: ../register.html');
+  header('location: ../register.php');
 }

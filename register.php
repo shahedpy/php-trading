@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -58,43 +61,7 @@
         </div>
     </div>
     <!-- SVG Preloader Ends -->
-	<!-- Live Style Switcher Starts - demo only -->
-    <div id="switcher" class="">
-        <div class="content-switcher">
-            <h4>STYLE SWITCHER</h4>
-            <ul>
-                <li>
-                    <a id="orange-css" href="#" title="orange" class="color"><img src="images/styleswitcher/colors/orange.png" alt="" width="30" height="30" /></a>
-                </li>
-                <li>
-                    <a id="green-css" href="#" title="green" class="color"><img src="images/styleswitcher/colors/green.png" alt="" width="30" height="30" /></a>
-                </li>
-                <li>
-                    <a id="blue-css" href="#" title="blue" class="color"><img src="images/styleswitcher/colors/blue.png" alt="" width="30" height="30" /></a>
-                </li>
-            </ul>
-
-            <p>BODY SKIN</p>
-			
-			<label><input class="dark_switch" type="radio" name="color_style" id="is_dark" value="dark" checked="checked" /> Dark</label>
-            <label><input class="dark_switch" type="radio" name="color_style" id="is_light" value="light" /> Light</label>
-
-            <hr />
-
-            <p>LAYOUT STYLE</p>
-            <label><input class="boxed_switch" type="radio" name="layout_style" id="is_wide" value="wide" checked="checked" /> Wide</label>
-            <label><input class="boxed_switch" type="radio" name="layout_style" id="is_boxed" value="boxed" /> Boxed</label>
-
-            <hr />
-
-            <a href="#" class="custom-button purchase">Purchase</a>
-            <div id="hideSwitcher">&times;</div>
-
-        </div>
-    </div>
-    <div id="showSwitcher" class="styleSecondColor"><i class="fa fa-cog fa-spin"></i></div>
-    <!-- Live Style Switcher Ends - demo only -->
-    <!-- Wrapper Starts -->
+	<!-- Wrapper Starts -->
     <div class="wrapper">
         <div class="container-fluid user-auth">
 			<div class="hidden-xs col-sm-4 col-md-4 col-lg-4">
@@ -188,6 +155,18 @@
 								<p class="text-center">already have an account ? <a href="login.html">Login</a>
 							</div>
 						</form>
+						<?php
+				if(isset($_SESSION['error_msg'])){
+					?>
+					<div class="text-center">
+					<?php
+					echo $_SESSION['error_msg'];
+					unset($_SESSION['error_msg']);
+					?>
+					</div>
+					<?php
+				}
+				?>
 					</div>
 				</div>
 			</div>

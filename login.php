@@ -169,7 +169,7 @@ session_start();
 						</div>
 						<!-- Section Title Ends -->
 						<!-- Form Starts -->
-						<form action="../api/login.php" method="post">
+						<form action="api/login.php" method="post">
 							<!-- Input Field Starts -->
 							<div class="form-group">
 								<input class="form-control" name="phone" id="phone" placeholder="Phone" type="phone" required>
@@ -183,7 +183,7 @@ session_start();
 							<!-- Submit Form Button Starts -->
 							<div class="form-group">
 								<button class="btn btn-primary" type="submit">login</button>
-								<p class="text-center">don't have an account ? <a href="register.html">register now</a>
+								<p class="text-center">don't have an account ? <a href="register.php">register now</a>
 							</div>
 							<!-- Submit Form Button Ends -->
 						</form>
