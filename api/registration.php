@@ -22,16 +22,29 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' ){
     $sql = "INSERT INTO `users` (`id`, `name`, `phone`, `nid`, `referral_id`, `password`) 
                         VALUES (NULL, '$name', '$phone', '$nid', '$refferal', '$enc_pass')";
 
-if ($conn->query($sql) === TRUE) {
-  echo 'Data inserted';
 
+//sql for check referal okay or not
+
+$select_ref_sql = "SELECT `phone` FROM `users` WHERE `phone` = '".$refferal."'";
+$result = $conn->query($select_ref_sql);
+if (mysqli_num_rows($result)){
+  if ($conn->query($sql) === TRUE) {
+    echo 'Data inserted';
+  
+  } else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+  }
+  
 } else {
-  echo "Error: " . $sql . "<br>" . $conn->error;
+  echo 'refferal does not exists';
 }
+
+
+//Insert data
 
 $conn->close();
 
 
 } else {
-  header('location: ../login/registration.php');
+  header('location: ../register.html');
 }
