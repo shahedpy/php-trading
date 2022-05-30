@@ -1,7 +1,6 @@
 <?php
+session_start();
 include 'include.php';
-
-
 
 if($_SERVER['REQUEST_METHOD'] == 'POST' ){
 
@@ -29,7 +28,8 @@ $select_ref_sql = "SELECT `phone` FROM `users` WHERE `phone` = '".$refferal."'";
 $result = $conn->query($select_ref_sql);
 if (mysqli_num_rows($result)){
   if ($conn->query($sql) === TRUE) {
-    echo 'Data inserted';
+    $_SESSION['success_msg'] = 'Account created successfully';
+    header('location: ../login.php');
   
   } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
