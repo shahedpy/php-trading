@@ -70,16 +70,12 @@ include "../login/logic.php";
                 <div class="container-fluid">
                     <!-- Info boxes -->
                     <div class="row">
-                        <div class="col-12 col-sm-6 col-md-3">
+                        <div class="col-12 col-sm-6 col-md-4">
                             <div class="info-box">
                                 <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
 
                                 <div class="info-box-content">
-                                    <span class="info-box-text">
-                           
-                                    
-                                    
-                                    Total Coin Order</span>
+                                    <span class="info-box-text">Wallet Balance</span>
                                     <span class="info-box-number">
                                     <?php
                                         include '../login/db.php';
@@ -104,12 +100,12 @@ include "../login/logic.php";
                             <!-- /.info-box -->
                         </div>
                         <!-- /.col -->
-                        <div class="col-12 col-sm-6 col-md-3">
+                        <div class="col-12 col-sm-6 col-md-4">
                             <div class="info-box mb-3">
                                 <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
 
                                 <div class="info-box-content">
-                                    <span class="info-box-text">Total Deal Order</span>
+                                    <span class="info-box-text">Voucher</span>
                                     <span class="info-box-number">
                                     <?php
                                         include '../login/db.php';
@@ -138,12 +134,12 @@ include "../login/logic.php";
                         <!-- fix for small devices only -->
                         <div class="clearfix hidden-md-up"></div>
 
-                        <div class="col-12 col-sm-6 col-md-3">
+                        <div class="col-12 col-sm-6 col-md-4">
                             <div class="info-box mb-3">
                                 <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
 
                                 <div class="info-box-content">
-                                    <span class="info-box-text">Total R. Deal Order</span>
+                                    <span class="info-box-text">Refferal Users</span>
                                     <span class="info-box-number">
                                     <?php
                                         include '../login/db.php';
@@ -161,38 +157,6 @@ include "../login/logic.php";
                                         }
                                         $conn->close();
                                         ?>
-                                    </span>
-                                </div>
-                                <!-- /.info-box-content -->
-                            </div>
-                            <!-- /.info-box -->
-                        </div>
-                        <!-- /.col -->
-                        <div class="col-12 col-sm-6 col-md-3">
-                            <div class="info-box mb-3">
-                                <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
-
-                                <div class="info-box-content">
-                                    <span class="info-box-text">Total Coin</span>
-                                    <span class="info-box-number">
-
-                                    <?php
-                                        include '../login/db.php';
-                                        $sql = "SELECT * FROM data";
-                                        //$sql = "SELECT * FROM data" WHERE id='';
-                                        $result = $conn->query($sql);
-                                        
-                                        if ($result->num_rows > 0) {
-                                          // output data of each row
-                                          while($row = $result->fetch_assoc()) {
-                                            echo $row["total_coin"];
-                                          }
-                                        } else {
-                                          echo "0 results";
-                                        }
-                                        $conn->close();
-                                        ?>
-
                                     </span>
                                 </div>
                                 <!-- /.info-box-content -->
