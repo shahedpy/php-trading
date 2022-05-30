@@ -1,9 +1,15 @@
 <?php
 
-    $conn = mysqli_connect("localhost", "root", "", "project");
+//DATABASE
+$SERVER = "localhost";
+$USER = "root";
+$PASS = "";
+$DB = "project";
 
-    if(!$conn){
-        echo "<h3 class='container my-3 text-center bg-dark text-white rounded-lg p-3'>Unable to establish connection to Database</h3>";
-    }
+//Connection
+$conn = mysqli_connect($SERVER, $USER, $PASS, $DB);
 
-?>
+//Check Connection
+if($conn->connect_errno){
+    echo 'Failed to connect database:'.$mysqli->connect_error;
+}

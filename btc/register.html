@@ -164,28 +164,29 @@
 						</div>
 						<!-- Section Title Ends -->
 						<!-- Form Starts -->
-						<form>
-							<!-- Input Field Starts -->
+						<form action="../api/registration.php" method="post">
 							<div class="form-group">
 								<input class="form-control" name="name" id="name" placeholder="NAME" type="text" required>
 							</div>
-							<!-- Input Field Ends -->
-							<!-- Input Field Starts -->
 							<div class="form-group">
-								<input class="form-control" name="email" id="email" placeholder="EMAIL" type="email" required>
+								<input class="form-control" name="phone" id="phone" placeholder="PHONE" type="number" required>
 							</div>
-							<!-- Input Field Ends -->
-							<!-- Input Field Starts -->
+							<div class="form-group">
+								<input class="form-control" name="nid" id="nid" placeholder="NID" type="number"  required>
+							</div>
+							<div class="form-group">
+								<input class="form-control" name="refferal" id="refferal" placeholder="REFFERAL" type="text" required>
+							</div>
 							<div class="form-group">
 								<input class="form-control" name="password" id="password" placeholder="PASSWORD" type="password" required>
 							</div>
-							<!-- Input Field Ends -->
-							<!-- Submit Form Button Starts -->
+							<div class="form-group">
+								<input class="form-control" name="confirm_password" id="confirm_password" placeholder="CONFIRM PASSWORD" type="password" required>
+							</div>
 							<div class="form-group">
 								<button class="btn btn-primary" type="submit">create account</button>
 								<p class="text-center">already have an account ? <a href="login.html">Login</a>
 							</div>
-							<!-- Submit Form Button Ends -->
 						</form>
 						<!-- Form Ends -->
 					</div>
