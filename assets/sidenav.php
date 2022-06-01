@@ -30,13 +30,13 @@ session_start();
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="../dashboard/index.php" class="nav-link">
                         <i class="nav-icon fas fa-tachometer"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="../dashboard/refferals.php" class="nav-link">
                         <i class="nav-icon fas fa-tachometer"></i>
                         <p>Refferal User</p>
                     </a>

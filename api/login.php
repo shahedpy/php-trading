@@ -26,20 +26,16 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
             
             header("location: ../dashboard");
 
-
-
-            
-
             
 
         } else {
             $_SESSION['error_message'] = "Username or Password Error!";
-            header('location: ../');
+            header('location: ../login.php');
         }
         
       } else {
           $_SESSION['error_message'] = $mysqli -> error;
-          header('location: ../');
+          header('location: ../login.php');
       }
 
     
