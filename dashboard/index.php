@@ -143,18 +143,18 @@ include "../login/logic.php";
                                     <span class="info-box-number">
                                     <?php
                                         include '../login/db.php';
-                                        $sql = "SELECT * FROM data";
+
+                                        $ref_id = $_SESSION['phone'];
+
+                                        $sql = "SELECT * FROM `users` WHERE referral_id = '$ref_id'";
+           
+
                                         //$sql = "SELECT * FROM data" WHERE id='';
                                         $result = $conn->query($sql);
                                         
-                                        if ($result->num_rows > 0) {
-                                          // output data of each row
-                                          while($row = $result->fetch_assoc()) {
-                                            echo $row["total_r_deal_order"];
-                                          }
-                                        } else {
-                                          echo "0 results";
-                                        }
+                                        echo $result->num_rows; 
+
+                                        
                                         $conn->close();
                                         ?>
                                     </span>
