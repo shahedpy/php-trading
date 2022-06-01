@@ -41,6 +41,12 @@ session_start();
                         <p>Refferal User</p>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="../dashboard/leaderboard.php" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer"></i>
+                        <p>Leaderboard</p>
+                    </a>
+                </li>
 
             </ul>
         </nav>
