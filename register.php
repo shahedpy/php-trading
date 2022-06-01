@@ -152,7 +152,7 @@ session_start();
 							</div>
 							<div class="form-group">
 								<button class="btn btn-primary" type="submit">create account</button>
-								<p class="text-center">already have an account ? <a href="login.html">Login</a>
+								<p class="text-center">already have an account ? <a href="login.php">Login</a>
 							</div>
 						</form>
 						<?php
