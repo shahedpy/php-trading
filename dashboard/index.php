@@ -79,17 +79,17 @@ include "../login/logic.php";
                                     <span class="info-box-number">
                                     <?php
                                         include '../login/db.php';
-                                        $sql = "SELECT * FROM data";
-                                        //$sql = "SELECT * FROM data" WHERE id='';
+                                        $ref_id = $_SESSION['phone'];
+                                        
+                                        $sql = "SELECT * FROM wallet WHERE phone = $ref_id";
+
                                         $result = $conn->query($sql);
                                         
                                         if ($result->num_rows > 0) {
                                           // output data of each row
                                           while($row = $result->fetch_assoc()) {
-                                            echo $row["total_coin_order"];
+                                            echo $row["amount"];
                                           }
-                                        } else {
-                                          echo "0 results";
                                         }
                                         $conn->close();
                                         ?>
