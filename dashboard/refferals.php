@@ -91,7 +91,7 @@ include '../api/include.php';
                                         print "</tr>";
                                     }
                                 } else {
-                                    echo "<tr><td colspan='7'>No Data Found</td></tr>";
+                                    echo "<tr><td colspan='4'>No Data Found</td></tr>";
                                 }
 
                                 ?>
