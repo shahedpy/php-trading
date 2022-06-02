@@ -17,10 +17,8 @@
 
         <li class="nav-item">
 
+            <a class="btn btn-danger" href="../api/logout.php">Logout</a>
 
-            <form method="POST" class="text-center">
-                <button class="btn btn-danger" name="logout">Logout</button>
-            </form>
         </li>
 
     </ul>
