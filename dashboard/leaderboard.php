@@ -66,7 +66,7 @@ include '../api/include.php';
                 <thead>
                   <tr>
                     <th>Id</th>
-                    <th>Voucher</th>
+                    <th>Voucher Id</th>
                     <th>Hitted By</th>
                     <th>Hitted Time</th>
                   </tr>
