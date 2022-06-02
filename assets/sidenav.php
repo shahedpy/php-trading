@@ -42,6 +42,12 @@ session_start();
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="../dashboard/voucher.php" class="nav-link">
+                        <i class="nav-icon fas fa-tachometer"></i>
+                        <p>Voucher</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="../dashboard/leaderboard.php" class="nav-link">
                         <i class="nav-icon fas fa-tachometer"></i>
                         <p>Leaderboard</p>
