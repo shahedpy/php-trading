@@ -77,7 +77,7 @@ include '../api/include.php';
                                 <?php
                                 $reff_id = $_SESSION['phone'];
 
-                                $SQL = "SELECT `id`, `name`, `phone`, `nid`  FROM users WHERE referral_id='$reff_id'";
+                                $SQL = "SELECT `id`, `name`, `phone`, `nid`  FROM users WHERE parent='$reff_id'";
 
                                 $result = mysqli_query($conn, $SQL);
 

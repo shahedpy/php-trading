@@ -109,18 +109,12 @@ include "../login/logic.php";
                                     <span class="info-box-number">
                                     <?php
                                         include '../login/db.php';
-                                        $sql = "SELECT * FROM data";
-                                        //$sql = "SELECT * FROM data" WHERE id='';
+                                        $ref_id = $_SESSION['phone'];
+                                        $sql = "SELECT * FROM voucher WHERE owned_by = $ref_id AND voucher_limit>0";
                                         $result = $conn->query($sql);
                                         
-                                        if ($result->num_rows > 0) {
-                                          // output data of each row
-                                          while($row = $result->fetch_assoc()) {
-                                            echo $row["total_deal_order"];
-                                          }
-                                        } else {
-                                          echo "0 results";
-                                        }
+                                        echo $result->num_rows; 
+
                                         $conn->close();
                                         ?>
                                     </span>
@@ -146,10 +140,8 @@ include "../login/logic.php";
 
                                         $ref_id = $_SESSION['phone'];
 
-                                        $sql = "SELECT * FROM `users` WHERE referral_id = '$ref_id'";
+                                        $sql = "SELECT * FROM `users` WHERE parent = '$ref_id'";
            
-
-                                        //$sql = "SELECT * FROM data" WHERE id='';
                                         $result = $conn->query($sql);
                                         
                                         echo $result->num_rows; 

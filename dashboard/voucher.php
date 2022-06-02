@@ -118,11 +118,15 @@ include "../login/logic.php";
 
                                     if ($result->num_rows > 0) {
                                         while ($row = $result->fetch_assoc()) {
+                                            if ($row['voucher_limit'] > 0) {
                                             print "<tr>";
                                             print "<td>" . $row['id'] . "</td>";
                                             print "<td>" . $row['voucher_limit'] . "</td>";
 
-                                            print "<td><button class='add-btn btn btn-info'>Add to Leaderboard</button></td>";
+                                            
+                                                print "<td><button class='add-btn btn btn-info'>Add to Leaderboard</button></td>";
+                                            }
+
                                             print "</tr>";
                                         }
                                     } else {
