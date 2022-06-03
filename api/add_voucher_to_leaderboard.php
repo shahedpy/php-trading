@@ -2,16 +2,23 @@
 session_start();
 include 'include.php';
 
+//check post
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+  //posted data
   $voucher_id = $_POST['voucher_id'];
   $owner = $_SESSION['phone'];
 
-  $sql = "INSERT INTO `leaderboard` (voucher,hitted_by) VALUES ('$voucher_id', '$owner')";
+  //insert data to leaderboard SQL
+  $insert_to_lb_sql = "INSERT INTO `leaderboard` (voucher,hitted_by) VALUES ('$voucher_id', '$owner')";
 
-  $result = $conn->query($sql);
-  if ($conn->query($sql) === TRUE) {
+  if ($conn->query($insert_to_lb_sql) === TRUE) {
 
-    $limit_sql = "SELECT `voucher_limit` FROM `voucher` where `id` = '$voucher_id'";
+    //voucher added to leaderboard
+    
+
+    //update voucher limit
+    $limit_sql = "SELECT `voucher_limit` FROM `voucher` WHERE `id` = '$voucher_id'";
 
     $result = mysqli_query($conn, $limit_sql);
 
@@ -29,50 +36,72 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       $update_limit_sql = "UPDATE `voucher` SET `voucher_limit` = '$limit' WHERE `voucher`.`id` = '$voucher_id'";
 
       if ($conn->query($update_limit_sql) === TRUE) {
+        
 
+        header('location: ../dashboard/leaderboard.php');
 
-
-
-
-
-
-
-        //get previous row count
-        // $countSql = "SELECT * FROM `leaderboard`";
-        // $result = $conn->query($countSql);
-
-        // if ($result->num_rows > 0) {
-        //   // output data of each row
-        //   while ($row = $result->fetch_assoc()) {
-        //     echo $row["id"]."<br>";
-        //   }
-        // }
-
-
-
-
-        //get data from row
-
-        //select parent
-
-        //add amount to parent
-
-        //add amount to refferer
-
-
-
-
-        //header('location: ../dashboard/leaderboard.php');
-
-      } else {
-        echo "Error updating record: " . $conn->error;
       }
+     
 
-      $conn->close();
     }
+
+    
+
   } else {
-    $_SESSION['error_msg'] = "Error: " . $sql . "<br>" . $conn->error;
+    echo "Error: " . $sql . "<br>" . $conn->error;
   }
 } else {
   header('location: ../dashboard/voucher.php');
 }
+  
+
+//   if ($conn->query($insert_to_lb_sql) === TRUE) {
+
+//   
+//  
+
+//   
+
+
+
+
+
+//         // get previous row count
+//         // $countSql = "SELECT * FROM `leaderboard`";
+//         // $result = $conn->query($countSql);
+
+//         // if ($result->num_rows > 0) {
+//         //   // output data of each row
+//         //   while ($row = $result->fetch_assoc()) {
+//         //     echo $row["id"]."<br>";
+//         //   }
+//         // }
+
+
+
+
+//         // get data from row
+
+//         // select parent
+
+//         // add amount to parent
+
+//         // add amount to refferer
+
+
+
+
+
+
+//       } else {
+//         echo "Error updating record: " . $conn->error;
+//       }
+
+//       $conn->close();
+//     }
+//   } else {
+//     $_SESSION['error_msg'] = "Error: " . $sql . "<br>" . $conn->error;
+//   }
+// } else {
+
+// }

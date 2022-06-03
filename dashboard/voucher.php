@@ -56,6 +56,20 @@ include "../login/logic.php";
             })
 
 
+            $("#buy-voucher-btn").on('click', function() {
+                $('#buy-voucher-modal').modal('show');
+
+                $("#voucher_qty").on('change', function() {
+                    var value = $("#voucher_qty").val() * 300;
+                    $("#amount").val(value);
+                })
+
+
+
+
+            })
+
+
         });
     </script>
 
@@ -74,8 +88,11 @@ include "../login/logic.php";
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
-                        <div class="col-sm-6">
+                        <div class="col-sm-3">
                             <h1 class="m-0">Voucher</h1>
+                        </div>
+                        <div class="col-sm-3">
+                            <button class="btn btn-info" id="buy-voucher-btn">Buy Voucher</button>
                         </div>
                         <!-- /.col -->
                         <div class="col-sm-6">
@@ -119,11 +136,11 @@ include "../login/logic.php";
                                     if ($result->num_rows > 0) {
                                         while ($row = $result->fetch_assoc()) {
                                             if ($row['voucher_limit'] > 0) {
-                                            print "<tr>";
-                                            print "<td>" . $row['id'] . "</td>";
-                                            print "<td>" . $row['voucher_limit'] . "</td>";
+                                                print "<tr>";
+                                                print "<td>" . $row['id'] . "</td>";
+                                                print "<td>" . $row['voucher_limit'] . "</td>";
 
-                                            
+
                                                 print "<td><button class='add-btn btn btn-info'>Add to Leaderboard</button></td>";
                                             }
 
@@ -165,6 +182,7 @@ include "../login/logic.php";
         </footer>
 
 
+        <!--================================ MODALS ===================================-->
 
         <!-- Confirm Modal -->
         <div class="modal fade" id="add-voucher-modal" role="dialog">
@@ -187,6 +205,39 @@ include "../login/logic.php";
                 </div>
             </div>
         </div>
+
+        <!-- Buy Voucher Modal -->
+        <div class="modal fade" id="buy-voucher-modal" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Confirmation</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="../api/buy_voucher.php" method="POST">
+                            <div class="form-group">
+                                <label for="voucher_qty">Quantity</label>
+                                <input type="number" class="form-control" id="voucher_qty" name="voucher_qty" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="voucher_qty">Amount</label>
+                                <input class="form-control" id="amount" disabled>
+                            </div>
+
+                            <input type="hidden" name="user_id" value="<?php echo $_SESSION['phone']; ?>">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-info" id="delete-confirm-btn">Buy</button>
+                        </form>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
 
 
 
