@@ -62,41 +62,45 @@ include '../api/include.php';
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
-                    <!-- Info boxes -->
-                    <div class="col-sm-12">
-                        <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
-                            <thead>
-                                <tr>
-                                    <th class="sorting sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">ID</th>
-                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Name</th>
-                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Phone</th>
-                                    <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">NID</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php
-                                $reff_id = $_SESSION['phone'];
 
-                                $SQL = "SELECT `id`, `name`, `phone`, `nid`  FROM users WHERE parent='$reff_id'";
+                    <div class="row">
+                        <!-- Info boxes -->
+                        <div class="col-sm-12">
+                            <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
+                                <thead>
+                                    <tr>
+                                        <th class="sorting sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">ID</th>
+                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Name</th>
+                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Phone</th>
+                                        <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">NID</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $reff_id = $_SESSION['phone'];
 
-                                $result = mysqli_query($conn, $SQL);
+                                    $SQL = "SELECT `id`, `name`, `phone`, `nid`  FROM users WHERE parent='$reff_id'";
 
-                                if ($result->num_rows > 0) {
-                                    while ($row = $result->fetch_assoc()) {
-                                        print "<tr>";
-                                        print "<td>" . $row['id'] . "</td>";
-                                        print "<td>" . $row['name'] . "</td>";
-                                        print "<td>" . $row['phone'] . "</td>";
-                                        print "<td>" . $row['nid'] . "</td>";
-                                        print "</tr>";
+                                    $result = mysqli_query($conn, $SQL);
+
+                                    if ($result->num_rows > 0) {
+                                        while ($row = $result->fetch_assoc()) {
+                                            print "<tr>";
+                                            print "<td>" . $row['id'] . "</td>";
+                                            print "<td>" . $row['name'] . "</td>";
+                                            print "<td>" . $row['phone'] . "</td>";
+                                            print "<td>" . $row['nid'] . "</td>";
+                                            print "</tr>";
+                                        }
+                                    } else {
+                                        echo "<tr><td colspan='4'>No Data Found</td></tr>";
                                     }
-                                } else {
-                                    echo "<tr><td colspan='4'>No Data Found</td></tr>";
-                                }
 
-                                ?>
-                            </tbody>
-                        </table>
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
 
 
