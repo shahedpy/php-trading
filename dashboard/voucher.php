@@ -112,13 +112,66 @@ include "../login/logic.php";
             <!-- Main content -->
             <section class="content">
                 <div class="container-fluid">
+
+                    <?php
+
+
+
+                    $phone = $_SESSION['phone'];
+
+                    $SQL = "SELECT COUNT(voucher_limit),SUM(voucher_limit) FROM voucher WHERE owned_by = '$phone'";
+
+                    $result = mysqli_query($conn, $SQL);
+
+                    $total_voucher = 0;
+                    $limit_voucher = 0;
+
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            if ($row['SUM(voucher_limit)'] > 0) {
+
+                                $total_voucher = $row['COUNT(voucher_limit)'];
+                                $limit_voucher = $row['SUM(voucher_limit)'];
+                            }
+
+                            
+                        }
+                    }
+
+
+
+
+
+                    ?>
+
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="">Total Voucher:</label>
+                                <input type="text" class="form-control" disabled value="<?php echo $total_voucher; ?>">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="">Total Voucher Limit:</label>
+                                <input type="text" class="form-control" disabled value="<?php echo $limit_voucher; ?>">
+                            </div>
+                        </div>
+                    </div>
+
+
                     <!-- Info boxes -->
                     <div class="row">
+
+
+
+
                         <div class="col-sm-12">
                             <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
                                 <thead>
                                     <tr>
-                                        <th class="sorting sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Total Voucher</th>
+                                        <th class="sorting sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Voucher ID</th>
                                         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Voucher Limit</th>
                                         <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending">Action</th>
                                     </tr>
