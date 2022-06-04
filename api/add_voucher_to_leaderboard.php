@@ -14,8 +14,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   if ($conn->query($insert_to_lb_sql) === TRUE) {
 
-    //voucher added to leaderboard
-    
+    // -------------------- voucher added to leaderboard
+
+    // change voucher status
+    $change_voucher_status_sql = "UPDATE `voucher` SET `status` = '1' WHERE `voucher`.`id` = '$voucher_id';";
+
+    if ($conn->query($change_voucher_status_sql) === TRUE) {
+
+      echo 'successfully changed!';
+    }
+
+
 
     //update voucher limit
     $limit_sql = "SELECT `voucher_limit` FROM `voucher` WHERE `id` = '$voucher_id'";
@@ -38,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       if ($conn->query($update_limit_sql) === TRUE) {
 
 
-        
+
 
 
         $row_count_sql = "SELECT * FROM `leaderboard`";
@@ -59,7 +68,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           $result = mysqli_query($conn, $select_leader_sql);
 
           if ($result->num_rows > 0) {
-            
+
             while ($row = $result->fetch_assoc()) {
 
               //Leader ID
@@ -127,6 +136,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                       $remove_leader_sql = "DELETE FROM `leaderboard` WHERE `leaderboard`.`id` = '$lead_id'";
 
                       if ($conn->query($remove_leader_sql) === TRUE) {
+
+
+
+                        //change voucher status
+                        $change_voucher_status_sql = "UPDATE `voucher` SET `status` = '0' WHERE `voucher`.`owned_by` = '$lead_phone';";
+
+                        if ($conn->query($change_voucher_status_sql) === TRUE) {
+
+                          echo 'successfully changed!';
+                        }
+
+
+
 
 
 
