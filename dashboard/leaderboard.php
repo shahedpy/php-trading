@@ -82,7 +82,21 @@ include '../api/include.php';
                       print "<tr>";
                       print "<td>" . $row['id'] . "</td>";
                       print "<td>" . $row['voucher'] . "</td>";
-                      print "<td>" . $row['hitted_by'] . "</td>";
+
+                      $lead_phone = $row['hitted_by'];
+
+                      $SQL = "SELECT `name` FROM `users` WHERE phone='$lead_phone'";
+
+                      $get_name_result = mysqli_query($conn, $SQL);
+
+                      if ($get_name_result->num_rows > 0) {
+                        while ($rowname = $get_name_result->fetch_assoc()) {
+                          echo "<td>" . $rowname['name'] . "</td>";
+                        }
+                      }
+
+                      //print "<td>" . $lead_phone . "</td>";
+
                       print "<td>" . $row['hitted_date'] . "</td>";
                       print "</tr>";
                     }
