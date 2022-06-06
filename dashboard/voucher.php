@@ -69,7 +69,7 @@ include "../api/include.php";
 
 
 
-                    var value = $("#voucher_qty").val() * <?php echo $voucher_rate;?>;
+                    var value = $("#voucher_qty").val() * <?php echo $voucher_rate; ?>;
                     $("#amount").val(value);
                 })
 
