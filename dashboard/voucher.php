@@ -189,19 +189,19 @@ include "../api/include.php";
                                     $phone = $_SESSION['phone'];
 
 
-                                    $check_voucher_status = "SELECT SUM(status) FROM voucher WHERE owned_by = '$phone'";
-                                    $result = mysqli_query($conn, $check_voucher_status);
+                                    // $check_voucher_status = "SELECT SUM(status) FROM voucher WHERE owned_by = '$phone'";
+                                    // $result = mysqli_query($conn, $check_voucher_status);
 
-                                    $status = 0;
-                                    if ($result->num_rows > 0) {
-                                        while ($row = $result->fetch_assoc()) {
+                                    // $status = 0;
+                                    // if ($result->num_rows > 0) {
+                                    //     while ($row = $result->fetch_assoc()) {
 
-                                            if ($row['SUM(status)']) {
+                                    //         if ($row['SUM(status)']) {
 
-                                                $status = $row['SUM(status)'];
-                                            }
-                                        }
-                                    }
+                                    //             $status = $row['SUM(status)'];
+                                    //         }
+                                    //     }
+                                    // }
 
                                     $SQL = "SELECT * FROM voucher WHERE owned_by = '$phone'";
 
@@ -215,11 +215,16 @@ include "../api/include.php";
                                                 print "<tr>";
                                                 print "<td>" . $row['id'] . "</td>";
                                                 print "<td>" . $row['voucher_limit'] . "</td>";
-
-
-                                                if ($status <= 0) {
+                                                //print "<td>".$row['status']."</td>";
+                                                if($row['status'] != 1) {
                                                     print "<td><button class='add-btn btn btn-info'>Add to Leaderboard</button></td>";
+                                                } else {
+                                                    print "<td></td>";
                                                 }
+                                                // if($row['status']<=1){
+                                                //     print "<td><button class='add-btn btn btn-info'>Add to Leaderboard</button></td>";
+                                                // }
+                                                
                                             }
 
                                             print "</tr>";
