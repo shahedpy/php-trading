@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $result = mysqli_query($conn, $row_count_sql);
 
 
-        if ($result->num_rows > 3) {
+        if ($result->num_rows > 2) {
 
           $a = array();
 
