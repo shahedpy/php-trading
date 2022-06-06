@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 04, 2022 at 11:55 PM
+-- Generation Time: Jun 06, 2022 at 10:06 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -64,8 +64,28 @@ CREATE TABLE `leaderboard` (
 --
 
 INSERT INTO `leaderboard` (`id`, `voucher`, `hitted_by`, `hitted_date`) VALUES
-(179, 23, '01848125325', '2022-06-05 03:53:18'),
-(180, 25, '01742057743', '2022-06-05 03:54:47');
+(199, 27, '01821090909', '2022-06-07 02:04:58'),
+(200, 30, '01821090909', '2022-06-07 02:05:14');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `system_info`
+--
+
+CREATE TABLE `system_info` (
+  `id` int(30) NOT NULL,
+  `meta_field` text NOT NULL,
+  `meta_value` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `system_info`
+--
+
+INSERT INTO `system_info` (`id`, `meta_field`, `meta_value`) VALUES
+(1, 'voucher_rate', '350'),
+(2, 'voucher_limit', '40');
 
 -- --------------------------------------------------------
 
@@ -123,10 +143,15 @@ CREATE TABLE `voucher` (
 --
 
 INSERT INTO `voucher` (`id`, `voucher_limit`, `owned_by`, `status`, `created_at`, `updated_at`) VALUES
-(21, 29, '01821090909', 0, '2022-06-05 02:36:53', '2022-06-05 03:54:47'),
-(22, 36, '01821090909', 0, '2022-06-05 02:37:01', '2022-06-05 03:49:25'),
-(23, 36, '01848125325', 1, '2022-06-05 03:46:32', '2022-06-05 03:53:18'),
-(25, 39, '01742057743', 1, '2022-06-05 03:54:37', '2022-06-05 03:54:47');
+(21, 22, '01821090909', 0, '2022-06-05 02:36:53', '2022-06-07 02:04:34'),
+(22, 31, '01821090909', 0, '2022-06-05 02:37:01', '2022-06-07 02:04:39'),
+(23, 36, '01848125325', 0, '2022-06-05 03:46:32', '2022-06-07 01:42:00'),
+(25, 39, '01742057743', 0, '2022-06-05 03:54:37', '2022-06-07 01:44:23'),
+(26, 37, '01821090909', 0, '2022-06-07 01:01:36', '2022-06-07 02:04:58'),
+(27, 38, '01821090909', 1, '2022-06-07 01:18:49', '2022-06-07 02:04:58'),
+(28, 38, '01821090909', 0, '2022-06-07 01:20:39', '2022-06-07 02:05:14'),
+(29, 40, '01821090909', 0, '2022-06-07 01:24:24', '2022-06-07 01:24:24'),
+(30, 39, '01821090909', 1, '2022-06-07 01:31:08', '2022-06-07 02:05:14');
 
 -- --------------------------------------------------------
 
@@ -147,11 +172,11 @@ CREATE TABLE `wallet` (
 --
 
 INSERT INTO `wallet` (`id`, `phone`, `amount`, `created_at`, `updated_at`) VALUES
-(1, '01821090909', 10422, '2022-06-03 02:43:35', '2022-06-05 03:54:47'),
+(1, '01821090909', 10908, '2022-06-03 02:43:35', '2022-06-07 02:05:14'),
 (2, '01221122112', 4900, '2022-06-03 02:53:43', '2022-06-03 11:46:28'),
-(3, '0', 610, '2022-06-05 02:11:38', '2022-06-05 03:54:47'),
-(4, '01848125325', 524, '2022-06-05 03:46:09', '2022-06-05 03:49:10'),
-(5, '01742057743', 4400, '2022-06-05 03:52:30', '2022-06-05 03:54:37');
+(3, '0', 1120, '2022-06-05 02:11:38', '2022-06-07 02:05:14'),
+(4, '01848125325', 632, '2022-06-05 03:46:09', '2022-06-07 01:42:00'),
+(5, '01742057743', 4538, '2022-06-05 03:52:30', '2022-06-07 01:44:23');
 
 --
 -- Indexes for dumped tables
@@ -168,6 +193,12 @@ ALTER TABLE `data`
 -- Indexes for table `leaderboard`
 --
 ALTER TABLE `leaderboard`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `system_info`
+--
+ALTER TABLE `system_info`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -204,7 +235,13 @@ ALTER TABLE `data`
 -- AUTO_INCREMENT for table `leaderboard`
 --
 ALTER TABLE `leaderboard`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=181;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=201;
+
+--
+-- AUTO_INCREMENT for table `system_info`
+--
+ALTER TABLE `system_info`
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `users`
@@ -216,7 +253,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `voucher`
 --
 ALTER TABLE `voucher`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `wallet`
