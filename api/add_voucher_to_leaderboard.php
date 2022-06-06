@@ -131,6 +131,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                       //echo 'Reward added to parent wallet';
 
 
+                      //get voucher id for change stauts
+                      $get_v_id_dlt_sql = "SELECT `voucher` FROM `leaderboard` WHERE id='$lead_id'";
+                      $win_v_id = 0;
+                      $result = mysqli_query($conn, $get_v_id_dlt_sql);
+                      if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                          $win_v_id = $row['voucher'];
+                        }
+                      }
+
+                      //change voucher status
+                      $change_voucher_status_sql = "UPDATE `voucher` SET `status` = '0' WHERE `voucher`.`id` = '$win_v_id';";
+
+                      if ($conn->query($change_voucher_status_sql) === TRUE) {
+
+                        echo 'successfully changed!';
+                      }
 
                       //REMOVE LEADER FROM LEADERBOARD;
                       $remove_leader_sql = "DELETE FROM `leaderboard` WHERE `leaderboard`.`id` = '$lead_id'";
@@ -138,14 +155,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                       if ($conn->query($remove_leader_sql) === TRUE) {
 
 
+                        //Successfully deleted
 
-                        //change voucher status
-                        $change_voucher_status_sql = "UPDATE `voucher` SET `status` = '0' WHERE `voucher`.`owned_by` = '$lead_phone';";
 
-                        if ($conn->query($change_voucher_status_sql) === TRUE) {
 
-                          echo 'successfully changed!';
-                        }
 
 
 
@@ -176,9 +189,3 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 } else {
   header('location: ../dashboard/voucher.php');
 }
-
-
-
-
-
-//if leader board has more than two people
