@@ -1,16 +1,7 @@
 <?php
 session_start();
-
-// Order of these files is IMPORTANT
-include "../login/db.php";
-include "../login/retrieve.php";
-include "../login/functions.php";
-include "../login/logic.php";
-
+include "../api/include.php";
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -60,7 +51,25 @@ include "../login/logic.php";
                 $('#buy-voucher-modal').modal('show');
 
                 $("#voucher_qty").on('change', function() {
-                    var value = $("#voucher_qty").val() * 300;
+
+                    ///dynamic voucher rate
+
+                    <?php
+
+                    $get_voucher_rate = "SELECT `meta_value` FROM `system_info` WHERE `meta_field` = 'voucher_rate'";
+                    $result = mysqli_query($conn, $get_voucher_rate);
+                    $voucher_rate = 0;
+                    if ($result->num_rows > 0) {
+
+                        while ($row = $result->fetch_assoc()) {
+                            $voucher_rate = $row['meta_value'];
+                        }
+                    }
+                    ?>
+
+
+
+                    var value = $("#voucher_qty").val() * <?php echo $voucher_rate;?>;
                     $("#amount").val(value);
                 })
 
@@ -188,9 +197,8 @@ include "../login/logic.php";
                                         while ($row = $result->fetch_assoc()) {
 
                                             if ($row['SUM(status)']) {
-                                            
-                                                $status = $row['SUM(status)'];
 
+                                                $status = $row['SUM(status)'];
                                             }
                                         }
                                     }

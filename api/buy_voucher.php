@@ -4,7 +4,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $user_id = $_POST['user_id'];
     $voucher_qty = $_POST['voucher_qty'];
-    $voucher_amount = $voucher_qty * 300;
+
+
+    //dynamic voucher_rate
+    $get_voucher_rate = "SELECT `meta_value` FROM `system_info` WHERE `meta_field` = 'voucher_rate'";
+    $result = $conn->query($get_voucher_rate);
+    $voucher_rate = 0;
+    if ($result->num_rows > 0) {
+        
+        while ($row = $result->fetch_assoc()) {
+            $voucher_rate = $row['meta_value'];
+        }
+    }
+
+
+    $voucher_amount = $voucher_qty * $voucher_rate;
     $wallet_balance = 0;
     $err = "";
 
@@ -27,25 +41,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         } else {
             echo 'Okay';
 
-            $new_balance = $wallet_balance-300;
+            $new_balance = $wallet_balance - $voucher_rate;
 
             $update_wallet_sql = "UPDATE `wallet` SET `amount` = '$new_balance' WHERE `wallet`.`phone` = '$user_id';";
 
             if ($conn->query($update_wallet_sql) === TRUE) {
-                
+
 
                 $add_voucher = "INSERT INTO `voucher` (voucher_limit, owned_by) VALUES (40, '$user_id')";
 
                 if ($conn->query($add_voucher) === TRUE) {
                     header('location: ../dashboard/voucher.php');
-                  } else {
+                } else {
                     echo "Error: " . $add_voucher . "<br>" . $conn->error;
-                  }
-
-
-              } else {
+                }
+            } else {
                 echo "Error updating record: " . $conn->error;
-              }
+            }
 
 
             //          
