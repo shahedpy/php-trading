@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($conn->query($update_wallet_sql) === TRUE) {
 
 
-                $add_voucher = "INSERT INTO `voucher` (voucher_limit, owned_by) VALUES (40, '$user_id')";
+                $add_voucher = "INSERT INTO `voucher` (voucher_limit, owned_by) VALUES (8, '$user_id')";
 
                 if ($conn->query($add_voucher) === TRUE) {
                     header('location: ../dashboard/voucher.php');

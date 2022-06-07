@@ -15,9 +15,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   if ($conn->query($insert_to_lb_sql) === TRUE) {
 
-    // -------------------- voucher added to leaderboard
+    // -------------------- voucher added to leaderboard --------------------//
 
-    //update_top_leader_child_count
 
     // change voucher status
     $change_voucher_status_sql = "UPDATE `voucher` SET `status` = '1' WHERE `voucher`.`id` = '$voucher_id';";
@@ -57,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $result = mysqli_query($conn, $row_count_sql);
 
 
-        if ($result->num_rows > 2) {
+        if ($result->num_rows > 1) {
 
           $a = array();
 
@@ -66,6 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
           }
 
           $lead_id = $a[0];
+          $child_count = 0;
 
           $select_leader_sql = "SELECT * FROM `leaderboard` WHERE `id`='$lead_id'";
           $result = mysqli_query($conn, $select_leader_sql);
@@ -75,7 +75,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             while ($row = $result->fetch_assoc()) {
 
               //Leader ID
-              $lead_phone = $row["hitted_by"];
+              $lead_phone = $row['hitted_by'];
+
+              //Child Count
+              $child_count = $row['child_count'];
+
+              $child_count++;
+
+              //update_top_leader_child_count
+              $update_child_count_sql = "UPDATE `leaderboard` SET `child_count` = '$child_count' WHERE `leaderboard`.`id` = '$lead_id'";
+
+              if ($conn->query($update_child_count_sql) === TRUE) {
+                echo 'child count updated';
+              }
+
+
+
+
+
+
+
+
+
+
 
               //get leader data
               $get_user_data =  "SELECT `parent` FROM `users` WHERE `phone` = '$lead_phone'";
@@ -153,26 +175,50 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                       }
 
                       //REMOVE LEADER FROM LEADERBOARD;
-                      $remove_leader_sql = "DELETE FROM `leaderboard` WHERE `leaderboard`.`id` = '$lead_id'";
+                      //get child
+                      //remove if child count = 2
 
-                      if ($conn->query($remove_leader_sql) === TRUE) {
+                      $c_count = 1;
+                      //get updated child count
+                      $c_count_sql = "SELECT `child_count` FROM `leaderboard` WHERE id='$lead_id'";
 
-
-                        //Successfully deleted
-
-
-
-
-
-
-
-
-
-                        //header to leadboard
-                        header('location: ../dashboard/leaderboard.php');
-                      } else {
-                        echo "Error deleting record: " . $conn->error;
+                      $result = mysqli_query($conn, $c_count_sql);
+                      if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                          $c_count = $row['child_count'];
+                        }
                       }
+
+
+
+
+
+
+
+
+
+
+
+
+                      if ($c_count >= 2) {
+
+
+
+
+                        $remove_leader_sql = "DELETE FROM `leaderboard` WHERE `leaderboard`.`id` = '$lead_id'";
+
+                        if ($conn->query($remove_leader_sql) === TRUE) {
+
+                          //Successfully deleted
+
+
+                        } else {
+                          echo "Error deleting record: " . $conn->error;
+                        }
+                      }
+
+
+                      header('location: ../dashboard/leaderboard.php');
                     }
                   }
                 }
