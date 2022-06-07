@@ -17,6 +17,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // -------------------- voucher added to leaderboard
 
+    //update_top_leader_child_count
+
     // change voucher status
     $change_voucher_status_sql = "UPDATE `voucher` SET `status` = '1' WHERE `voucher`.`id` = '$voucher_id';";
 
