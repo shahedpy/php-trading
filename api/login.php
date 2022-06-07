@@ -22,6 +22,7 @@ if($_SERVER['REQUEST_METHOD']=="POST"){
 
             $_SESSION['name'] = $row['name'];
             $_SESSION['phone'] = $phone;
+            $_SESSION['role'] = $row['roles'];
 
             
             header("location: ../dashboard");
