@@ -101,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                   }
 
                   //add 18% of voucher rate
-                  $leader_balance += $voucher_rate*.26;
+                  $leader_balance += $voucher_rate * .26;
 
                   $add_award_to_leader_sql = "UPDATE `wallet` SET `amount` = '$leader_balance' WHERE `wallet`.`phone` = $lead_phone;";
 
@@ -124,7 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                       }
                     }
 
-                    $leader_parent_balance += $voucher_rate*.04;
+                    $leader_parent_balance += $voucher_rate * .04;
 
                     //echo $leader_parent_balance;
                     $add_award_to_leader_parent_sql = "UPDATE `wallet` SET `amount` = '$leader_parent_balance' WHERE `wallet`.`phone` = '$lead_parent_phone';";
