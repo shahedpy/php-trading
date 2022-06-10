@@ -213,18 +213,18 @@ include "../api/include.php";
 
                                             if ($row['voucher_limit'] > 0) {
                                                 print "<tr>";
-                                                print "<td>" . $row['id'] . "</td>";
+                                                $v_id = $row['id'];
+                                                print "<td>" . $v_id . "</td>";
                                                 print "<td>" . $row['voucher_limit'] . "</td>";
-                                                //print "<td>".$row['status']."</td>";
-                                                if($row['status'] != 1) {
-                                                    print "<td><button class='add-btn btn btn-info'>Add to Leaderboard</button></td>";
-                                                } else {
-                                                    print "<td></td>";
-                                                }
-                                                // if($row['status']<=1){
-                                                //     print "<td><button class='add-btn btn btn-info'>Add to Leaderboard</button></td>";
-                                                // }
+                                                $check_voucher_sql = "SELECT * FROM `leaderboard` WHERE `voucher`='$v_id'";
+                                                $result_lb = mysqli_query($conn, $check_voucher_sql);
                                                 
+                                                //Don't show add to leaderboard button if voucher is active
+                                                if($result_lb->num_rows > 0){
+                                                    print "<td></td>";    
+                                                } else {
+                                                    print "<td><button class='add-btn btn btn-info'>Add to Leaderboard</button></td>";
+                                                }
                                             }
 
                                             print "</tr>";
@@ -255,14 +255,6 @@ include "../api/include.php";
             <!-- Control sidebar content goes here -->
         </aside>
         <!-- /.control-sidebar -->
-
-        <!-- Main Footer -->
-        <footer class="main-footer">
-            <strong>Copyright &copy; 2014-2021</strong> All rights reserved.
-            <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> 3.2.0
-            </div>
-        </footer>
 
 
         <!--================================ MODALS ===================================-->
