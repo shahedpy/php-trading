@@ -1,28 +1,12 @@
-<?php
-session_start();
-
-// Order of these files is IMPORTANT
-include "../login/db.php";
-include "../login/retrieve.php";
-include "../login/functions.php";
-include "../login/logic.php";
-
-?>
-
-
-
-
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>
-        <?php
-        echo $_SESSION['name'];
-         ?>
-    </title>
+    <script src="plugins/jquery/jquery.min.js"></script>
+    <title><?php echo $_SESSION['name']; ?></title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -32,14 +16,20 @@ include "../login/logic.php";
     <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
+
+    <script>
+        $(document).ready(function() {
+            $(".withdraw-btn").on('click', function() {
+                $("#withdraw-modal").modal('show');
+            })
+        })
+    </script>
 </head>
 
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div class="wrapper">
         <?php include '../assets/navtop.php'; ?>
-        
         <?php include '../assets/sidenav.php'; ?>
-
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
@@ -77,23 +67,23 @@ include "../login/logic.php";
                                 <div class="info-box-content">
                                     <span class="info-box-text">Wallet Balance</span>
                                     <span class="info-box-number">
-                                    <?php
+                                        <?php
                                         include '../login/db.php';
                                         $ref_id = $_SESSION['phone'];
-                                        
+
                                         $sql = "SELECT * FROM wallet WHERE phone = $ref_id";
 
                                         $result = $conn->query($sql);
-                                        
+
                                         if ($result->num_rows > 0) {
-                                          // output data of each row
-                                          while($row = $result->fetch_assoc()) {
-                                            echo $row["amount"];
-                                          }
+                                            // output data of each row
+                                            while ($row = $result->fetch_assoc()) {
+                                                echo $row["amount"];
+                                            }
                                         }
                                         $conn->close();
                                         ?>
-                                        </span>
+                                    </span>
                                 </div>
                                 <!-- /.info-box-content -->
                             </div>
@@ -107,13 +97,13 @@ include "../login/logic.php";
                                 <div class="info-box-content">
                                     <span class="info-box-text">Voucher</span>
                                     <span class="info-box-number">
-                                    <?php
+                                        <?php
                                         include '../login/db.php';
                                         $ref_id = $_SESSION['phone'];
                                         $sql = "SELECT * FROM voucher WHERE owned_by = $ref_id AND voucher_limit>0";
                                         $result = $conn->query($sql);
-                                        
-                                        echo $result->num_rows; 
+
+                                        echo $result->num_rows;
 
                                         $conn->close();
                                         ?>
@@ -135,18 +125,18 @@ include "../login/logic.php";
                                 <div class="info-box-content">
                                     <span class="info-box-text">Refferal Users</span>
                                     <span class="info-box-number">
-                                    <?php
+                                        <?php
                                         include '../login/db.php';
 
                                         $ref_id = $_SESSION['phone'];
 
                                         $sql = "SELECT * FROM `users` WHERE parent = '$ref_id'";
-           
-                                        $result = $conn->query($sql);
-                                        
-                                        echo $result->num_rows; 
 
-                                        
+                                        $result = $conn->query($sql);
+
+                                        echo $result->num_rows;
+
+
                                         $conn->close();
                                         ?>
                                     </span>
@@ -159,7 +149,11 @@ include "../login/logic.php";
                     </div>
                     <!-- /.row -->
 
-
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-4">
+                            <button class="withdraw-btn btn btn-info"><i class="fas fa-money-bill-wave-alt"></i> Withdraw</button>
+                        </div>
+                    </div>
 
 
                 </div>
@@ -175,7 +169,6 @@ include "../login/logic.php";
         </aside>
         <!-- /.control-sidebar -->
 
-        
     </div>
     <!-- ./wrapper -->
 
@@ -198,7 +191,34 @@ include "../login/logic.php";
     <!-- ChartJS -->
     <script src="plugins/chart.js/Chart.min.js"></script>
 
-    
+
+
+
+    <!--============================== Withdraw Modal ==========================-->
+    <div class="modal fade" id="withdraw-modal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Withdraw</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <form action="../api/withdraw.php" method="POST">
+                        <div class="form-group">
+                            <label for="amount">Amount</label>
+                            <input type="number" class="form-control" id="amount" name="amount" required>
+                        </div>
+                        <input type="hidden" name="user_id" value="<?php echo $_SESSION['phone']; ?>">
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-info" id="delete-confirm-btn">Withdraw</button>
+                    </form>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 
 </html>
