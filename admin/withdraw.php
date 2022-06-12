@@ -113,6 +113,18 @@ if ($_SESSION['role'] != 1) {
                         </div>
                         <div class="col-sm-12">
 
+                        <?php
+                        //data table
+                        include '../api/include.php';
+
+                        $withdraw_data_sql = "SELECT * FROM `withdraw`";
+                        
+
+                        
+                        
+                        
+                        ?>
+
                         </div>
                     </div>
 
