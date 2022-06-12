@@ -66,10 +66,17 @@ if ($_SESSION['role'] != 1) {
                                 </p>
                             </a>
                         </li>
+                        <li class="nav-header">Withdraw</li>
                         <li class="nav-item">
                             <a href="withdraw.php" class="nav-link">
                                 <i class="fas fa-money-bill-wave-alt nav-icon"></i>
-                                <p>Withdraw</p>
+                                <p>Requests</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="withdraw_history.php" class="nav-link">
+                                <i class="fas fa-money-bill-wave-alt nav-icon"></i>
+                                <p>History</p>
                             </a>
                         </li>
 

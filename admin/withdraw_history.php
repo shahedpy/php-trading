@@ -85,18 +85,18 @@ if ($_SESSION['role'] != 1) {
                         </li>
                         <li class="nav-header">Withdraw</li>
                         <li class="nav-item">
-                            <a href="withdraw.php" class="nav-link active">
+                            <a href="withdraw.php" class="nav-link">
                                 <i class="fas fa-money-bill-wave-alt nav-icon"></i>
                                 <p>Requests</p>
                             </a>
                         </li>
-
                         <li class="nav-item">
-                            <a href="withdraw_history.php" class="nav-link">
+                            <a href="withdraw_history.php" class="nav-link active">
                                 <i class="fas fa-money-bill-wave-alt nav-icon"></i>
                                 <p>History</p>
                             </a>
                         </li>
+
 
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -146,7 +146,7 @@ if ($_SESSION['role'] != 1) {
                                         <th>Amount</th>
                                         <th>Status</th>
                                         <th>Requested</th>
-                                        <th>Action</th>
+                                        <th>Approved</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -154,7 +154,7 @@ if ($_SESSION['role'] != 1) {
                                     //data table
                                     include '../api/include.php';
 
-                                    $withdraw_data_sql = "SELECT * FROM `withdraw` WHERE `status` = 0";
+                                    $withdraw_data_sql = "SELECT * FROM `withdraw` WHERE `status` = 1";
                                     $result = $conn->query($withdraw_data_sql);
 
                                     if ($result->num_rows > 0) {
@@ -170,10 +170,11 @@ if ($_SESSION['role'] != 1) {
                                                 print '<td>Completed</td>';
                                             }
                                             print '<td>' . $row['created_at'] . '</td>';
+                                            print '<td>' . $row['updated_at'] . '</td>';
 
 
 
-                                            print '<td><button class="btn btn-info approve-button">Approve</button></td>';
+
                                             print '</tr>';
                                         }
                                     } else {
@@ -207,30 +208,6 @@ if ($_SESSION['role'] != 1) {
             <!-- Control sidebar content goes here -->
         </aside>
         <!-- /.control-sidebar -->
-
-        <!--================================ MODALS ===================================-->
-
-        <!-- Confirm Modal -->
-        <div class="modal fade" id="approve-modal" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Confirmation</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-                    <div class="modal-body">
-                        <p>Do you want to approve the withdrawal request?</p>
-                        <form action="../api/approve_withdraw_req.php" method="POST">
-                            <input type="hidden" id="withdraw-id" name="withdraw-id">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-info" id="approve-btn">Approve</button>
-                        </form>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    </div>
-                </div>
-            </div>
-        </div>
 
 
 

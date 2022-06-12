@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     } else {
 
         //check if already a request in pending
-        $check_pending_req_sql = "SELECT `user` FROM `withdraw` WHERE `user` = '$user'";
+        $check_pending_req_sql = "SELECT `user` FROM `withdraw` WHERE `user` = '$user' AND `status`= 0 ";
         $check_pending_result = $conn->query($check_pending_req_sql);
 
         if ($check_pending_result->num_rows > 0) {
