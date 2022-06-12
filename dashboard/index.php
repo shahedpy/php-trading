@@ -1,4 +1,9 @@
-<?php session_start(); ?>
+<?php
+session_start();
+if($_SESSION['role'] == 1){
+    header('location: ../admin/');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -156,17 +161,17 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <?php 
-                            if(isset($_SESSION['error_msg'])){
+                            <?php
+                            if (isset($_SESSION['error_msg'])) {
                                 echo $_SESSION['error_msg'];
                                 unset($_SESSION['error_msg']);
                             }
 
-                            if(isset($_SESSION['success_msg'])){
+                            if (isset($_SESSION['success_msg'])) {
                                 echo $_SESSION['success_msg'];
                                 unset($_SESSION['success_msg']);
                             }
-                             ?>
+                            ?>
                         </div>
                     </div>
 

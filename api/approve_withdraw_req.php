@@ -9,7 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($conn->query($sql) === TRUE) {
         echo "Record updated successfully";
-        header('location: ../admin/withdraw_history');
+        header('location: ../admin/withdraw_history.php');
     } else {
         echo "Error updating record: " . $conn->error;
     }
