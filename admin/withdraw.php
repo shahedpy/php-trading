@@ -58,8 +58,8 @@ if ($_SESSION['role'] != 1) {
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-                        <li class="nav-item menu-open">
-                            <a href="index.php" class="nav-link active">
+                        <li class="nav-item">
+                            <a href="index.php" class="nav-link">
                                 <i class="nav-icon fas fa-money-bill-alt"></i>
                                 <p>
                                     Voucher
@@ -67,7 +67,7 @@ if ($_SESSION['role'] != 1) {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="withdraw.php" class="nav-link">
+                            <a href="withdraw.php" class="nav-link active">
                                 <i class="fas fa-money-bill-wave-alt nav-icon"></i>
                                 <p>Withdraw</p>
                             </a>
@@ -88,7 +88,7 @@ if ($_SESSION['role'] != 1) {
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-3">
-                            <h1 class="m-0">Voucher</h1>
+                            <h1 class="m-0">Withdraw</h1>
                         </div>
                         <!-- /.col -->
 
@@ -103,32 +103,16 @@ if ($_SESSION['role'] != 1) {
             <section class="content">
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col-sm-3">
-                            <form action="../api/buy_voucher_by_admin.php" method="post">
-
-                                <div class="form-group">
-                                    <label for="">Phone Number:</label>
-                                    <input type="text" class="form-control" name="user_id" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="">Voucher Qty:</label>
-                                    <input type="text" class="form-control" name="voucher_qty" required>
-                                </div>
-                                <div class="form-grouup">
-                                    <input class="btn btn-info" type="submit" value="Send Voucher" name="voucher">
-                                </div>
-
-                            </form>
-
-
-                        </div>
-                        <div class="col-sm-3">
+                        <div class="col-sm-12">
                             <?php
                             if (isset($_SESSION['success'])) {
                                 echo $_SESSION['success'];
                                 unset($_SESSION['success']);
                             }
                             ?>
+                        </div>
+                        <div class="col-sm-12">
+
                         </div>
                     </div>
 
