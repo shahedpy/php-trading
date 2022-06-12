@@ -154,6 +154,21 @@
                             <button class="withdraw-btn btn btn-info"><i class="fas fa-money-bill-wave-alt"></i> Withdraw</button>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <?php 
+                            if(isset($_SESSION['error_msg'])){
+                                echo $_SESSION['error_msg'];
+                                unset($_SESSION['error_msg']);
+                            }
+
+                            if(isset($_SESSION['success_msg'])){
+                                echo $_SESSION['success_msg'];
+                                unset($_SESSION['success_msg']);
+                            }
+                             ?>
+                        </div>
+                    </div>
 
 
                 </div>
